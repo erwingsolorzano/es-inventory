@@ -68,3 +68,13 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     res.status(500).json({ message: 'Login error', error });
   }
 };
+
+// Test route to get all users
+export const getUsers = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const users = await User.find();
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: 'Error retrieving users', error });
+  }
+};
