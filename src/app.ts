@@ -1,25 +1,32 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import productRoutes from './routes/product.routes';
+import authRoutes from './routes/auth.routes';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/inventario';
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/inventory';
 
-// Middleware para parsear JSON
+// Set the strictQuery option based on your needs
+mongoose.set('strictQuery', false);
+
+mongoose.connect(MONGO_URI)
+  .then(() => console.log('Connected to MongoDB'))
+  .catch(err => console.error('Error connecting to MongoDB: ', err));
+
+// Middleware for parsing JSON
 app.use(express.json());
 
-// Conexión a MongoDB
-mongoose.set('strictQuery', false); // or true, depending on your needs
-mongoose.connect(MONGO_URI)
-  .then(() => console.log('Conectado a MongoDB'))
-  .catch(err => console.error('Error conectando a MongoDB: ', err));
+// Product routes
+app.use('/products', productRoutes);
 
-// Ruta de ejemplo
+// Authentication routes
+app.use('/auth', authRoutes);
+
 app.get('/', (req, res) => {
-  res.send('Bienvenido al sistema de inventario');
+  res.send('Welcome to the inventory system');
 });
 
-// Iniciar el servidor
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+  console.log(`Server running at http://localhost:${PORT}`);
 });
