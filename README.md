@@ -35,6 +35,7 @@ MONGO_URI: MongoDB connection string.
 JWT_SECRET: Secret key for signing JWT tokens (replace with a secure secret).
 Docker Compose for MongoDB
 Ensure Docker is running and use the provided docker-compose.yml to spin up MongoDB:
+```bash
 version: '3.8'
 services:
   mongodb:
@@ -46,15 +47,19 @@ services:
       - mongo_data:/data/db
 volumes:
   mongo_data:
+```
 
 Start MongoDB with:
-
+```bash
 docker-compose up -d
+```
 
 Run the Development Server
 Start your Node.js server:
 
+```bash
 npm run dev
+```
 
 Project Structure
 
@@ -84,3 +89,4 @@ Inventory System Repository
 ├── docker-compose.yml
 ├── package.json
 └── tsconfig.json
+```
