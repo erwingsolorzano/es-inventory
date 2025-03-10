@@ -58,6 +58,7 @@ npm run dev
 
 Project Structure
 
+```bash
 Inventory System Repository
 │
 ├── src/
