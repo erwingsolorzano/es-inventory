@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import mongoose from 'mongoose';
 import productRoutes from './routes/product.routes';
 import authRoutes from './routes/auth.routes';
@@ -14,7 +15,9 @@ mongoose.connect(MONGO_URI)
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('Error connecting to MongoDB: ', err));
 
-// Middleware for parsing JSON
+app.use(cors());
+
+  // Middleware for parsing JSON
 app.use(express.json());
 
 // Product routes
